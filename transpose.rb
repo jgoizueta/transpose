@@ -1,9 +1,14 @@
 # TODO:
-# 1. from to
-# 2. adjust space after chord
-# 3. support tabs ---- (from to normalization %, + if > /2) avoid negative results
-# 4. tests
-# 5. gem with bin command with -o option, etc.
+# * expand tabulators to spaces with option for tab with
+# * support tablature notation:
+#    - detect tab lines
+#    - adjust semitones:
+#          semi %= Chord::PITCHES.size
+#          semi -= Chord::PITCHES.size if semi > Chord::PITCHES.size/2
+#          semi += Chord::PITCHES.size while semi + min_fret < 0
+#    - add semitones to fret positions, adjust line alignment
+# * tests
+# * gem with bin command with -o option, etc.
 
 require_relative 'lib/chord'
 require_relative 'lib/transposer'
