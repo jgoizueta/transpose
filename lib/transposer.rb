@@ -39,8 +39,9 @@ class Transposer
           else
             check_text before
             transposed << before
-            transposed << transposed_chord(chord)
-            line = after
+            new_chord = transposed_chord(chord)
+            transposed << new_chord
+            line = adjust(after, chord, new_chord)
           end
         end
         if @lyrics && !@actual_chords
@@ -50,6 +51,25 @@ class Transposer
         end
       end
     end
+  end
+
+  def adjust(line, from, to)
+    if line
+      d = from.size - to.size
+      if d != 0
+        if d > 0
+          line = ' '*d + line
+        else
+          prefix = line[0, -d]
+          # TODO: if prefix.size < -d could try to remove inner whitespace
+          # or to keep record of space to be removed from the same line later
+          if prefix && prefix.match(/\A\s+\Z/)
+            line = line[prefix.size..-1]
+          end
+        end
+      end
+    end
+    line
   end
 
   def self.semitones(from, to)
