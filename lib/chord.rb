@@ -1,6 +1,12 @@
 class Chord
-  PATTERN = /\b([A-G])(b|#)?((?:maj|min|[Mm+°])?(?:6|5)?(?:aug|d[io]m|ø|sus4)?7?\*?(?:\(\*\))?)(?:\/([A-Ga-g])(b|#)?)?/
-  # PATTERN = /\b([A-G])(b|#)?((?:maj|min|[Mm+°])?(?:6|5)?(?:aug|d[io]m|ø)?7?\*?(?:\(\*\))?)\b/ # => sharp not recognized
+
+  PATTERN = %r{
+    \b
+    ([A-G])(b|\#)?
+    ((?:maj|min|[Mm+°])?(?:6|5)?(?:aug|d[io]m|ø|sus4)?7?(?:\*|\(\*\))?)
+    (?:\/([A-Ga-g])(b|\#)?)?
+    # cannot place a \b here because it prevents recognizing # as sharp
+  }x
   PITCHES = %w(C C# D D# E F F# G G# A A# B)
   ENHARMONICS = {
     'Cb' => 'B',
