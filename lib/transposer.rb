@@ -52,4 +52,7 @@ class Transposer
     end
   end
 
+  def self.semitones(from, to)
+    Chord.from_text(to).pitch - Chord.from_text(from).pitch
+  end
 end
