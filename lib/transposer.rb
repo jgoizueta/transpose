@@ -22,7 +22,7 @@ class Transposer
     c.transpose(@semi).to_s
   end
 
-  def transpose(file, output = STDIN)
+  def transpose(file, output = STDOUT)
     File.open(file, 'r') do |input|
       input.each_line do |line|
         line.chomp!
